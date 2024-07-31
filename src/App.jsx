@@ -1,46 +1,26 @@
-import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from '@src/pages/Login';
 import '@styles/App.css';
+import { AuthProvider } from '@src/context/AuthProvider';
+import PrivateRoute from '@src/context/PrivateRoute';
+import Home from '@src/pages/Home';
+import Notfound from '@src/pages/Notfound';
+import AdminPanel from '@src/pages/Admin/AdminPanel';
 
 function App () {
-	const [user, setUser] = useState({
-		cedula: '',
-		password: ''
-	});
-
-	const onSubmit = (e) => {
-		e.preventDefault();
-		const form = e.target;
-		const cedula = form[0].value;
-		const password = form[1].value;
-		setUser({
-			cedula,
-			password
-		});
-		form.reset();
-		console.log(user);
-	};
 	return (
-		<>
-			<h1
-				className='text-6xl font-custom text-center mb-8'
-			>Bienvenido
-			</h1>
-			<form
-				className='flex flex-col items-center gap-6 p-4 text-2xl'
-				action=''
-				onSubmit={onSubmit}
-			>
-				<input
-					className='p-2'
-					type='text' placeholder='Cedula'
-				/>
-				<input
-					className='p-2'
-					type='password' placeholder='Contraseña'
-				/>
-				<button type='submit'>Ingresar</button>
-			</form>
-		</>
+		<Router className='general'>
+			<AuthProvider>
+				<Routes>
+					<Route path='login' element={<Login />} />
+					<Route path='' element={<PrivateRoute />}>
+						<Route index element={<Home />} />
+						<Route path='adminpanel' element={<AdminPanel />} />
+					</Route>
+					<Route path='*' element={<Notfound />} />
+				</Routes>
+			</AuthProvider>
+		</Router>
 	);
 }
 
