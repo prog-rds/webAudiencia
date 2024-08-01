@@ -2,6 +2,7 @@ import { useLogin } from '@src/hooks/useLogin';
 import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '@src/context/AuthProvider.jsx';
 import { useNavigate } from 'react-router-dom';
+import logo from '@src/assets/img/ytlogo.png';
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -30,29 +31,37 @@ const Login = () => {
 		login();
 	};
 	return (
-		<>
-			<h1
-				className='text-6xl font-custom text-center mb-8'
-			>Bienvenido
-			</h1>
-			<form
-				className='flex flex-col items-center gap-6 p-4 text-2xl'
-				action=''
-				onSubmit={onSubmit}
-			>
-				<input
-					className='p-2'
-					type='text' placeholder='Cedula'
-					name='document'
-				/>
-				<input
-					className='p-2'
-					type='password' placeholder='Contraseña'
-					name='password'
-				/>
-				<button type='submit'>Ingresar</button>
-			</form>
-		</>
+		<div className='bg-texture bg-cover w-screen h-screen grid place-items-center'>
+			<div className='w-12/12 bg flex flex-col md:flex-row'>
+				<div className='w-12/12 md:w-6/12 grid place-items-center'>
+					<img className='place-items-center pt-12 w-96 md:w-full md:pt-0' src={logo} alt='logo' />
+				</div>
+				<div>
+					<h1 className='text-6xl font-custom text-center mb-8 font-bold'>
+						¡Bienvenido al portal de YouTube!
+					</h1>
+					<form
+						className='flex flex-col items-center gap-6 p-4 text-2xl'
+						action=''
+						onSubmit={onSubmit}
+					>
+						<input
+							className='bg-fields-color border-2 outline-fields-color border-fields-color rounded-3xl w-80 h-10 placeholder:text-black  text-black p-4'
+							type='text' placeholder='Cedula'
+							name='document'
+						/>
+						<input
+							className='bg-fields-color border-2 outline-fields-color border-fields-color rounded-3xl w-80 h-10 placeholder:text-black  text-black p-4'
+							type='password' placeholder='Contraseña'
+							name='password'
+						/>
+						<button type='submit' className='bg-transparent text-black font-bold border rounded-3xl px-4 py-2 border-black outline-fields-color '>Ingresar</button>
+					</form>
+				</div>
+
+			</div>
+
+		</div>
 	);
 };
 

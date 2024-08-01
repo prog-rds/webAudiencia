@@ -11,13 +11,14 @@ export default {
 				colorTextTable: '#ffffff',
 				advertising: '#E1E1F1',
 				colorButtons: '#DB3753',
-				colorButtonsText: '#ffffff'
+				colorButtonsText: '#ffffff',
+				'fields-color': 'rgba(124, 130, 141, 0.28)'
 			},
 			fontFamily: {
 				customFont: ['Barlow', 'sans-serif']
 			},
 			backgroundImage: {
-				imgcup: "url('@src/assets/img/bg.png')",
+				texture: "url('@src/assets/img/texture.png')",
 				bgAdmin: "url('@src/assets/img/bg-users.png')",
 				login: "url('@src/assets/img/login.png')",
 				'btns-admin': "url('@src/assets/img/Rectangle.png')",
