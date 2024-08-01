@@ -12,7 +12,7 @@ const VideoTableRow = ({ video, onFocused, isFocused }) => {
 	const input1 = useRef();
 	const input2 = useRef();
 	const input3 = useRef();
-	const input4 = useRef();
+	// const input4 = useRef();
 	const handleDonePost = (_) => unFocus(true);
 	// LoadFlag(video.TeamNameSpanish, setTheFlag);
 
@@ -115,12 +115,9 @@ const VideoTableRow = ({ video, onFocused, isFocused }) => {
 				{actualVideo.StudyCode}
 			</td>
 			<td ref={input2} className='break-words px-6 py-4 focus:bg-gray-400 focus:cursor-text focus:text-primary-color'>
-				{actualVideo.VideoName}
-			</td>
-			<td ref={input3} className='break-words px-6 py-4 focus:bg-gray-400 focus:cursor-text focus:text-primary-color'>
 				{actualVideo.Duration}
 			</td>
-			<td ref={input4} className='break-words px-6 py-4 focus:bg-gray-400 focus:cursor-text focus:text-primary-color'>
+			<td ref={input3} className='break-words px-6 py-4 focus:bg-gray-400 focus:cursor-text focus:text-primary-color'>
 				{actualVideo.Link}
 			</td>
 			<td className='px-6 py-4 text-right'>
