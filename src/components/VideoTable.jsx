@@ -5,17 +5,6 @@ import VideoUpload from './VideoUpload';
 const VideoTable = ({ videoStudies, setVideoStudies, rowFocused, setRowFocused }) => {
 	const handleFocused = id => setRowFocused(id);
 
-	const addRow = () => {
-		const newVideoStudy = {
-			StudyCode: -1,
-			VideoName: '',
-			Duration: '',
-			Link: ''
-		};
-		setVideoStudies([...videoStudies, newVideoStudy]);
-		setRowFocused(-1);
-	};
-
 	return (
 
 		<div className=''>
@@ -28,9 +17,6 @@ const VideoTable = ({ videoStudies, setVideoStudies, rowFocused, setRowFocused }
 						<tr className='border-t border-b'>
 							<th scope='col' className='px-6 py-3'>
 								Estudio
-							</th>
-							<th scope='col' className='px-6 py-3'>
-								Nombre
 							</th>
 							<th scope='col' className='px-6 py-3'>
 								Duración
