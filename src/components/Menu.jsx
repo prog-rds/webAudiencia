@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 function Menu () {
 	const activeStyle = 'border-b-2 border-black';
-    const closeSession = () => {
+	const closeSession = () => {
 		window.localStorage.clear();
 		window.location.href = '/login';
 	};
@@ -21,7 +21,7 @@ function Menu () {
 				</li>
 				<li>
 					<NavLink
-						to='/estudio'
+						to='/adminusers'
 						className={({ isActive }) =>
 							isActive ? activeStyle : undefined}
 					>Usuarios
