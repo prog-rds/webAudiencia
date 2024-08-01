@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
 	color-scheme: light dark;
 	color: rgba(255, 255, 255, 0.87);
 	background-color: #242424;
@@ -44,5 +44,16 @@ button:focus-visible {
 	}
 	button {
 		background-color: #f9f9f9;
+	}
+} */
+@layer components {
+	.title-principal{
+		@apply text-colorTitle text-5xl font-bold italic text-left
+	}
+	
+}
+@layer components {
+	.header-table{
+		@apply bg-colorTitle font-bold text-base flex w-full text-colorTextTable p-4 rounded-t-xl
 	}
 }

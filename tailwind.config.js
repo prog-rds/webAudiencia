@@ -6,6 +6,13 @@ export default {
 	],
 	theme: {
 		extend: {
+			colors: {
+				colorTitle: '#DB3753',
+				colorTextTable: '#ffffff',
+				advertising: '#E1E1F1',
+				colorButtons: '#DB3753',
+				colorButtonsText: '#ffffff'
+			},
 			fontFamily: {
 				customFont: ['Barlow', 'sans-serif']
 			},
@@ -22,6 +29,10 @@ export default {
 			},
 			flex: {
 				custom: '1 1 46%'
+			},
+			gridTemplateColumns: {
+				// Complex site-specific column configuration
+				SubTableAdvertising: '2fr 1fr'
 			}
 		}
 	},
