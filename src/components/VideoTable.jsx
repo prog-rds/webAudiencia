@@ -15,8 +15,8 @@ const VideoTable = ({ videoStudies, rowFocused, setRowFocused, type }) => {
 				<VideoUpload type={type} />
 			</div>
 			<div className='max-w-full relative overflow-x-auto shadow-md sm:rounded-lg  '>
-				<table className=' text-sm text-black table-auto hidden md:block '>
-					<thead className='text-xs text-black uppercase '>
+				<table className=' text-sm text-center text-black min-w-full '>
+					<thead className='text-xs text-white uppercase bg-headerTable sm:rounded-lg'>
 						<tr className='border-t border-b'>
 							<th scope='col' className='px-6 py-3'>
 								{column1}

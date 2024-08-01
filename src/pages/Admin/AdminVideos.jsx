@@ -26,7 +26,7 @@ const AdminVideos = () => {
 	return (
 		<Layout>
 			<div className='mb-12'>
-				<h2 className='md:text-5xl mb-10'>Video estudios</h2>
+				<h2 className='w-full title-principal'>Video estudios</h2>
 				<Skeletons on={ldVs} msg='Cargando '>
 					<VideoTable
 						videoStudies={videoStudies}
@@ -35,7 +35,7 @@ const AdminVideos = () => {
 						type='0'
 					/>
 				</Skeletons>
-				<h2 className='md:text-5xl mb-10'>Video publicidades</h2>
+				<h2 className='w-full title-principal mt-8'>Video publicidades</h2>
 				<Skeletons on={ldVa} msg='Cargando '>
 					<VideoTable
 						videoStudies={videoAds}

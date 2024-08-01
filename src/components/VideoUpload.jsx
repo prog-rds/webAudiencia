@@ -58,17 +58,21 @@ function VideoUpload ({ type }) {
 
 	return (
 		<>
-			<div className='file-uploader btns mb-5 flex'>
-				<div className='mr-3 text-2xl '>Nuevo: </div>
+			<div className='file-uploader btns mb-5 flex items-center'>
+
+				<div className='mr-3 text-2xl font-semibold '>Nuevo: </div>
+				<label htmlFor='file-input'>
+					<div class='btn-upload btns'> Choose your file </div>
+				</label>
 				{
 					video
 						? (
 							<Skeletons on={loading} msg='Subiendo'>
 								<span className='mx-3 '>{video.name}</span>
-								<button onClick={handleUpload}>SUBIR</button>
+								<button className='btn-upload' onClick={handleUpload}>SUBIR</button>
 							</Skeletons>
 						)
-						: <input type='file' accept='video/mp4' onChange={handleVideoChange} />
+						: <input id='file-input' type='file' accept='video/mp4' onChange={handleVideoChange} />
 				}
 			</div>
 		</>

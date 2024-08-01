@@ -1,16 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* :root {
-	color-scheme: light dark;
-	color: rgba(255, 255, 255, 0.87);
-	background-color: #242424;
-	font-synthesis: none;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+:root {
+	--inputFile: #DB3753;
 }
+/* 
 
 body {
 	margin: 0;
@@ -57,4 +51,20 @@ button:focus-visible {
 		@apply font-bold border rounded-md py-1 px-3 mx-2 bg-colorButtons text-colorButtonsText w-36
 	} 
 }
+.file-uploader input {
+    display: none;
+}
 
+.btn-upload{
+    cursor: pointer;
+    width: 200px;
+    border-radius: 8px;
+    background-color:var(--inputFile);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+	color:white;
+	padding: 6px 12px;	
+}
