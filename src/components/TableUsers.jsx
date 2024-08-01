@@ -19,23 +19,25 @@ function TableUsers () {
 	};
 	return (
 		<Skeletons on={loading} msg='Cargando usuarios'>
-			<div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
-				<Link className='btns mx-3 float-right mb-5' to='./new'>
+			<div className='w-full text-right mb-4'>
+				<Link className='btns-table mx-3 mb-5' to='./new'>
 					Nuevo
 				</Link>
-				<table className='w-full text-sm text-center text-black '>
-					<thead className='text-xs text-black uppercase '>
+			</div>
+			<div className='relative overflow-x-auto shadow-md'>
+				<table className='text-sm text-center text-black min-w-full '>
+					<thead className='text-xs text-white uppercase bg-headerTable sm:rounded-lg'>
 						<tr className='border-t border-b'>
-							<th scope='col' className='px-6 py-3'>
+							<th scope='col' className='px-4 py-3'>
 								Id
 							</th>
-							<th scope='col' className='px-6 py-3'>
+							<th scope='col' className='px-4 py-3'>
 								Documento
 							</th>
-							<th scope='col' className='px-6 py-3'>
+							<th scope='col' className='px-4 py-3'>
 								Rol
 							</th>
-							<th scope='col' className='px-6 py-3'>
+							<th scope='col' className='px-4 py-3'>
 								Acciones
 							</th>
 						</tr>

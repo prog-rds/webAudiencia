@@ -5,7 +5,7 @@ function Layout ({ children }) {
 	return (
 		<>
 			<Menu />
-			<main className='w-full mx-10 mt-24'>
+			<main className='w-full py-24 px-10'>
 				{children}
 			</main>
 		</>

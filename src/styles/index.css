@@ -50,10 +50,11 @@ button:focus-visible {
 	.title-principal{
 		@apply text-colorTitle text-5xl font-bold italic text-left
 	}
-	
-}
-@layer components {
 	.header-table{
 		@apply bg-colorTitle font-bold text-base flex w-full text-colorTextTable p-4 rounded-t-xl
 	}
+	.btns-table {
+		@apply font-bold border rounded-md py-1 px-3 mx-2 bg-colorButtons text-colorButtonsText w-36
+	} 
 }
+

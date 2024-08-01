@@ -95,16 +95,16 @@ const RowUser = ({ user, onFocused, isFocused }) => {
 
 	return (
 		<tr className={`border-b  text-center ${isFocused ? 'bg-gray-50/50' : 'hover:bg-gray-400'}`}>
-			<td scope='row' className='px-6 py-4 font-medium text-gray-900 whitespace-nowrap'>
+			<td scope='row' className='px-4 py-2 font-medium text-gray-900 whitespace-nowrap'>
 				{user.UserId.slice(0, 8)}
 			</td>
-			<td ref={input1} className='px-6 py-4 focus:bg-white focus:cursor-text focus:text-primary-color'>
+			<td ref={input1} className='px-2 py-2 focus:bg-white focus:cursor-text focus:text-primary-color'>
 				{user.Document}
 			</td>
-			<td className='px-6 py-4 focus:bg-white focus:cursor-text focus:text-primary-color'>
+			<td className='px-2 py-2 focus:bg-white focus:cursor-text focus:text-primary-color'>
 				<select
 					disabled
-					className='px-6 py-4 bg-transparent focus:bg-white focus:cursor-text focus:text-primary-color disabled:appearance-none'
+					className='px-2 py-2 bg-transparent focus:bg-white focus:cursor-text focus:text-primary-color disabled:appearance-none'
 					ref={input3}
 					defaultValue={statusOpts.find(o => o === actualUser.UserRole) || statusOpts[0]}
 				>
@@ -115,7 +115,7 @@ const RowUser = ({ user, onFocused, isFocused }) => {
 					}
 				</select>
 			</td>
-			<td className='px-6 py-4'>
+			<td className='px-2 py-2'>
 				{
 					isFocused && localFocus
 						? (
