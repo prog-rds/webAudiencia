@@ -1,5 +1,4 @@
 import VideoTable from '@src/components/VideoTable';
-import VideoUpload from '@src/components/VideoUpload';
 import { getItems } from '@src/hooks/LoaderData';
 import { useEffect, useState } from 'react';
 import Layout from './Layout';
