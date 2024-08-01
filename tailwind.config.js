@@ -12,7 +12,8 @@ export default {
 				advertising: '#E1E1F1',
 				colorButtons: '#DB3753',
 				colorButtonsText: '#ffffff',
-				'fields-color': 'rgba(124, 130, 141, 0.28)'
+				'fields-color': 'rgba(124, 130, 141, 0.28)',
+				menu: '#E1E1F1'
 			},
 			fontFamily: {
 				customFont: ['Barlow', 'sans-serif']

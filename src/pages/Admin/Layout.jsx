@@ -1,9 +1,11 @@
 import React from 'react';
+import Menu from '@src/components/Menu';
 
 function Layout ({ children }) {
 	return (
 		<>
-			<main className='w-full mx-10 mt-10'>
+			<Menu />
+			<main className='w-full mx-10 mt-24'>
 				{children}
 			</main>
 		</>
