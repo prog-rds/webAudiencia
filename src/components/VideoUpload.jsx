@@ -1,21 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Skeletons } from './Skeletons';
 
 function VideoUpload () {
 	const [video, setVideo] = useState(null);
+	const [videoDuration, setVideoDuration] = useState(0);
+	const [loading, setLoading] = useState('init');
 
 	const handleVideoChange = (event) => {
+		console.log(event.target.files[0]);
 		setVideo(event.target.files[0]);
 	};
 
-	const handleUpload = async () => {
+	useEffect(() => {
 		if (!video) return;
+		const tagVideo = document.createElement('video');
+		tagVideo.preload = 'metadata';
+		tagVideo.onloadedmetadata = () => {
+			const minutes = Math.floor(tagVideo.duration / 60);
+			const seconds = Math.floor(tagVideo.duration % 60).toString().padStart(2, '0');
+			const formattedDuration = `${minutes}:${seconds}`;
+			setVideoDuration(formattedDuration);
+		};
+		tagVideo.src = URL.createObjectURL(video);
+	}, [video]);
 
+	const handleUpload = async () => {
+		setLoading('loading');
+		if (!video) return;
+		console.log('video', video);
 		const formData = new FormData();
 		formData.append('video', video);
+		formData.append('duration', videoDuration);
 		const uri = import.meta.env.VITE_API_URI;
 		const headers = new Headers({
 			Authorization: `Bearer ${window.localStorage.token}`
-		// 'Content-Type': 'multipart/form-data'
 		});
 		try {
 			const response = await fetch(`${uri}/assets`, {
@@ -30,14 +48,29 @@ function VideoUpload () {
 			console.log('Video uploaded successfully!');
 		} catch (error) {
 			console.error(error);
+		} finally {
+			setLoading('init');
+			setVideo(null);
+			window.location.reload();
 		}
 	};
 
 	return (
-		<div>
-			<input type='file' accept='video/mp4' onChange={handleVideoChange} />
-			<button onClick={handleUpload}>Upload Video</button>
-		</div>
+		<>
+			<div className='file-uploader btns mb-5 flex'>
+				<div className='mr-3 text-2xl '>Nuevo: </div>
+				{
+					video
+						? (
+							<Skeletons on={loading} msg='Subiendo'>
+								<span className='mx-3 '>{video.name}</span>
+								<button onClick={handleUpload}>SUBIR</button>
+							</Skeletons>
+						)
+						: <input type='file' accept='video/mp4' onChange={handleVideoChange} />
+				}
+			</div>
+		</>
 	);
 }
 
