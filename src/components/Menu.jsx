@@ -29,7 +29,7 @@ function Menu () {
 				</li>
 				<li>
 					<NavLink
-						to='adminvideos'
+						to='/adminvideos'
 						className={({ isActive }) =>
 							isActive ? activeStyle : undefined}
 					>Videos y publicidad
