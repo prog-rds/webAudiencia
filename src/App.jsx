@@ -9,6 +9,8 @@ import AdminPanel from '@src/pages/Admin/AdminPanel';
 import Studies from '@src/pages/User/Studies';
 import ViewStudy from '@src/pages/User/ViewStudy';
 import AdminVideos from '@src/pages/Admin/AdminVideos';
+import AdminUsers from '@src/pages/Admin/AdminUsers';
+import NewUser from '@src/pages/Admin/NewUser';
 
 function App () {
 	return (
@@ -24,6 +26,10 @@ function App () {
 						</Route>
 						<Route path='adminpanel' element={<AdminPanel />} />
 						<Route path='adminvideos' element={<AdminVideos />} />
+						<Route path='adminusers' element={<Outlet />}>
+							<Route index element={<AdminUsers />} />
+							<Route path='new' element={<NewUser />} />
+						</Route>
 					</Route>
 					<Route path='*' element={<Notfound />} />
 				</Routes>
