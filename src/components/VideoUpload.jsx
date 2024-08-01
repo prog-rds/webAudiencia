@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Skeletons } from './Skeletons';
 
-function VideoUpload () {
+function VideoUpload ({ type }) {
 	const [video, setVideo] = useState(null);
 	const [videoDuration, setVideoDuration] = useState(0);
 	const [loading, setLoading] = useState('init');
@@ -31,6 +31,7 @@ function VideoUpload () {
 		const formData = new FormData();
 		formData.append('video', video);
 		formData.append('duration', videoDuration);
+		formData.append('type', type);
 		const uri = import.meta.env.VITE_API_URI;
 		const headers = new Headers({
 			Authorization: `Bearer ${window.localStorage.token}`

@@ -2,21 +2,24 @@ import React from 'react';
 import VideoTableRow from '@components/VideoTableRow';
 import VideoUpload from './VideoUpload';
 
-const VideoTable = ({ videoStudies, setVideoStudies, rowFocused, setRowFocused }) => {
+const VideoTable = ({ videoStudies, rowFocused, setRowFocused, type }) => {
 	const handleFocused = id => setRowFocused(id);
+	const iType = parseInt(type);
+	const id = ['StudyCode', 'VideoAdId'][iType];
+	const column1 = ['Estudio', 'Publicidad'][iType];
 
 	return (
 
 		<div className=''>
 			<div className='flex justify-end'>
-				<VideoUpload />
+				<VideoUpload type={type} />
 			</div>
 			<div className='max-w-full relative overflow-x-auto shadow-md sm:rounded-lg  '>
 				<table className=' text-sm text-black table-auto hidden md:block '>
 					<thead className='text-xs text-black uppercase '>
 						<tr className='border-t border-b'>
 							<th scope='col' className='px-6 py-3'>
-								Estudio
+								{column1}
 							</th>
 							<th scope='col' className='px-6 py-3'>
 								Duración
@@ -31,25 +34,18 @@ const VideoTable = ({ videoStudies, setVideoStudies, rowFocused, setRowFocused }
 					</thead>
 					<tbody>
 						{
-							videoStudies.map((video, index) => (
+							videoStudies.map((video) => (
 								<VideoTableRow
-									isFocused={rowFocused === video.StudyCode}
-									onFocused={() => handleFocused(video.StudyCode)}
-									key={video.StudyCode}
+									isFocused={rowFocused === video[id]}
+									onFocused={() => handleFocused(video[id])}
+									key={video[id]}
 									video={video}
-									index={index}
+									type={type}
 								/>
 							))
 						}
 					</tbody>
 				</table>
-				<div className='md:hidden'>
-					{
-						videoStudies.map((match, index) => (
-							<React.Fragment key={index} />
-						))
-					}
-				</div>
 			</div>
 		</div>
 	);

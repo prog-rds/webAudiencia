@@ -35,6 +35,13 @@ const deleteVideoStudy = ({ id, setLoading, handleDonePost }) => {
 			window.alert(err);
 		});
 };
+const deleteVideoAd = ({ id, setLoading, handleDonePost }) => {
+	postData({ setLoading, path: `/videoads/${id}`, method: 'DELETE' }).then(() => handleDonePost())
+		.catch((err) => {
+			setLoading('ok');
+			window.alert(err);
+		});
+};
 
 const postData = ({ setLoading, path, body, method }) => {
 	return new Promise((resolve, reject) => {
@@ -67,4 +74,4 @@ const postData = ({ setLoading, path, body, method }) => {
 	});
 };
 
-export { createUser, deleteUser, updateUser, loadImage, deleteVideoStudy };
+export { createUser, deleteUser, updateUser, loadImage, deleteVideoStudy, deleteVideoAd };
