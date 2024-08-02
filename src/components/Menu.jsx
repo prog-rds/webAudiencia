@@ -2,13 +2,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 function Menu () {
-	const activeStyle = 'border-b-2 border-black';
+	const activeStyle = 'border-b-2 border-linksMenu';
 	const closeSession = () => {
 		window.localStorage.clear();
 		window.location.href = '/login';
 	};
 	return (
-		<nav className='bg-menu  font-customFont fixed top-0 w-full h-12 flex justify-center items-center z-50 '>
+		<nav className='bg-menu text-linksMenu font-customFont fixed top-0 w-full h-12 flex justify-center items-center z-50 font-bold '>
 			<ul className='w-8/12 flex justify-center items-center gap-4'>
 				<li>
 					<NavLink

@@ -49,7 +49,10 @@ button:focus-visible {
 	}
 	.btns-table {
 		@apply font-bold border rounded-md py-1 px-3 mx-2 bg-colorButtons text-colorButtonsText w-36
-	} 
+	}
+	.btns-ppl {
+		@apply font-bold border rounded-md py-1 px-3 mx-2 bg-colorButtons text-colorButtonsText w-36
+	}
 }
 .file-uploader input {
     display: none;
