@@ -7,6 +7,15 @@ const createUser = ({ loading, setLoading, body, handleDonePost }) => {
 			window.alert(err);
 		});
 };
+
+const createAd = ({ loading, setLoading, body, handleDonePost }) => {
+	if (loading === 'ok') return;
+	postData({ setLoading, path: '/ads', body, method: 'POST' }).then((d) => handleDonePost(d))
+		.catch((err) => {
+			window.alert(err);
+		});
+};
+
 const updateUser = ({ id, loading, setLoading, body, handleDonePost }) => {
 	if (loading === 'ok') return;
 	postData({ setLoading, path: `/users/${id}`, body, method: 'PATCH' }).then((d) => handleDonePost(d))
@@ -23,6 +32,13 @@ const loadImage = ({ loading, setLoading, body, handleDonePost }) => {
 };
 const deleteUser = ({ id, setLoading, handleDonePost }) => {
 	postData({ setLoading, path: `/users/${id}`, method: 'DELETE' }).then(() => handleDonePost())
+		.catch((err) => {
+			setLoading('ok');
+			window.alert(err);
+		});
+};
+const deleteAd = ({ id, setLoading, handleDonePost }) => {
+	postData({ setLoading, path: `/ads/${id}`, method: 'DELETE' }).then(() => handleDonePost())
 		.catch((err) => {
 			setLoading('ok');
 			window.alert(err);
@@ -74,4 +90,4 @@ const postData = ({ setLoading, path, body, method }) => {
 	});
 };
 
-export { createUser, deleteUser, updateUser, loadImage, deleteVideoStudy, deleteVideoAd };
+export { createUser, deleteUser, updateUser, loadImage, deleteVideoStudy, deleteVideoAd, createAd, deleteAd };

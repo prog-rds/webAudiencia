@@ -61,9 +61,7 @@ function VideoUpload ({ type }) {
 			<div className='file-uploader btns mb-5 flex items-center'>
 
 				<div className='mr-3 text-2xl font-semibold '>Nuevo: </div>
-				<label htmlFor='file-input'>
-					<div class='btn-upload btns'> Choose your file </div>
-				</label>
+
 				{
 					video
 						? (
@@ -72,7 +70,14 @@ function VideoUpload ({ type }) {
 								<button className='btn-upload' onClick={handleUpload}>SUBIR</button>
 							</Skeletons>
 						)
-						: <input id='file-input' type='file' accept='video/mp4' onChange={handleVideoChange} />
+						: (
+							<>
+								<input id='file-input' type='file' accept='video/mp4' onChange={handleVideoChange} />
+								<label htmlFor='file-input'>
+									<div className='btn-upload btns'> Choose your file </div>
+								</label>
+							</>
+						)
 				}
 			</div>
 		</>

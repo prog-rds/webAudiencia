@@ -44,30 +44,36 @@ function VideoPlayer ({ mainVideoUrl, promoVideoUrl, initPromo, promoDuration })
 	};
 
 	return (
-		<div ref={container} id='video-container'>
-			{isFullScreen && (
-				<video
-					ref={videoRef}
-					src={isPlayingPromo ? promoVideoUrl : `${mainVideoUrl}#t=${playTime}`}
-					onPlaying={() => setIsPlaying(true)}
-					onEnded={handleEnd}
-					onClick={handleClick}
-					autoPlay
-				/>
-			)}
-			{
-				isPlayingPromo && (
-					<Overlay
-						isPlaying={isPlaying}
-						isFullScreen={isFullScreen}
-						promoDuration={promoDuration}
-						handleSkip={handleSkip}
-						promoSkipped={promoSkipped}
+		<>
+			<div className='flex items-center justify-center h-screen'>
+				<button className='btn-upload' onClick={handlePlay}>Play</button>
+			</div>
+			<div ref={container} id='video-container'>
+				{isFullScreen && (
+					<video
+						ref={videoRef}
+						src={isPlayingPromo ? promoVideoUrl : `${mainVideoUrl}#t=${playTime}`}
+						onPlaying={() => setIsPlaying(true)}
+						onEnded={handleEnd}
+						onClick={handleClick}
+						autoPlay
 					/>
-				)
-			}
-			<button onClick={handlePlay}>Play</button>
-		</div>
+				)}
+				{
+					isPlayingPromo && (
+						<Overlay
+							isPlaying={isPlaying}
+							isFullScreen={isFullScreen}
+							promoDuration={promoDuration}
+							handleSkip={handleSkip}
+							promoSkipped={promoSkipped}
+						/>
+					)
+				}
+			</div>
+
+		</>
+
 	);
 }
 

@@ -15,7 +15,7 @@ export default {
 				'fields-color': 'rgba(124, 130, 141, 0.28)',
 				menu: '#E1E1F1',
 				footer: '#E1E1F1',
-				headerTable:'#DB3753'
+				headerTable: '#DB3753'
 			},
 			fontFamily: {
 				customFont: ['Barlow', 'sans-serif']
@@ -36,7 +36,7 @@ export default {
 			},
 			gridTemplateColumns: {
 				// Complex site-specific column configuration
-				SubTableAdvertising: '2fr 1fr'
+				SubTableAdvertising: '1fr 1fr'
 			}
 		}
 	},

@@ -1,22 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import AdvertisingCard from '@src/components/AdvertisingCard';
+import { createAd, deleteAd } from '@src/hooks/PostData';
 
-function RowTable ({ video, ads }) {
+function RowTable ({ video, ads, videoAds }) {
 	const [rowAds, setRowAds] = useState([]);
+	const [loadingAd, setLoadingAd] = useState('init');
 
 	useEffect(() => {
 		const localAds = ads.filter((ad) => ad.StudyCode === video.StudyCode);
-		console.log(localAds);
 		setRowAds(localAds);
 	}, [ads, video]);
 
-	// AdId INTEGER PRIMARY KEY,
-	// StudyCode TEXT,  ----------
-	// VideoAdId INTEGER, ----------
-	// AdEntryTime TEXT,
-	// SkipEntryTime TEXT,
-	// IsSecundary TEXT,
+	const createAdFn = (ad) => {
+		ad.StudyCode = video.StudyCode;
+		ad.IsSecundary = 'false';
+		const body = { ...ad };
+		createAd({ loading: loadingAd, setLoading: setLoadingAd, body, handleDonePost });
+	};
 
+	const handleDonePost = (_) => {
+		setLoadingAd('init');
+		window.location.reload();
+	};
+
+	const deleteAdFn = (d) => {
+		const chk = window.confirm('¿Estás seguro de eliminar esta publicidad?');
+		if (chk)
+			deleteAd({ id: d.AdId, setLoading: setLoadingAd, handleDonePost });
+	};
 	return (
 		<div className='row flex mb-4 shadow-md'>
 			<div className='grid w-2/5 border-advertising border-2 place-items-center'>
@@ -26,15 +37,20 @@ function RowTable ({ video, ads }) {
 				<div className='text-center  grid grid-cols-3 '>
 					{
 						rowAds.map((ad) => (
-							<AdvertisingCard key={ad.AdId} ad={ad} />
+							<AdvertisingCard
+								key={ad.AdId}
+								ad={ad}
+								videoAds={videoAds}
+								StudyCode={ad.StudyCode}
+								deleteAdFn={deleteAdFn}
+							/>
 						))
 					}
-					<AdvertisingCard />
-					{/* <AdvertisingCard />
-					<AdvertisingCard />
-					<AdvertisingCard />
-					<AdvertisingCard />
-					<AdvertisingCard /> */}
+					<AdvertisingCard
+						createAdFn={createAdFn}
+						videoAds={videoAds}
+						empty
+					/>
 				</div>
 			</div>
 		</div>
@@ -42,3 +58,10 @@ function RowTable ({ video, ads }) {
 }
 
 export default RowTable;
+
+// AdId INTEGER PRIMARY KEY,
+// StudyCode TEXT,  ----------
+// VideoAdId INTEGER, ----------
+// AdEntryTime TEXT,
+// SkipEntryTime TEXT,
+// IsSecundary TEXT,
