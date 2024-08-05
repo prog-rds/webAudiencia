@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import '@styles/Overlay.css';
 
 function Overlay ({ isPlaying, isFullScreen, promoDuration, handleSkip, promoSkipped }) {
@@ -8,6 +8,7 @@ function Overlay ({ isPlaying, isFullScreen, promoDuration, handleSkip, promoSki
 		if (isPlaying && !promoSkipped) {
 			const timer = setTimeout(() => {
 				setShowSkipButton(true);
+				console.log('show skip ');
 			}, promoDuration * 1000);
 			return () => clearTimeout(timer);
 		}
@@ -17,8 +18,9 @@ function Overlay ({ isPlaying, isFullScreen, promoDuration, handleSkip, promoSki
 		showSkipButton && (
 			<div id='skip-button'>
 				<button
+					className='text-xl'
 					onClick={handleSkip}
-				>Skip Ad
+				>Omitir
 				</button>
 			</div>
 		)

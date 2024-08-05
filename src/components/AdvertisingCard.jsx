@@ -36,12 +36,6 @@ function AdvertisingCard ({ ad, videoAds, empty, createAdFn, deleteAdFn }) {
 		deleteAdFn(ad);
 	};
 
-	const defaultVideo = () => {
-		if (empty) return 'Selección de publicidad';
-		return videoNames[1];
-		// return videoAds.find(va => va.VideoAdId === ad.VideoAdId)?.VideoName;
-	};
-
 	useEffect(() => {
 		const initVa = videoAds.map(v => v.VideoName);
 		initVa.unshift('Selección de publicidad');
@@ -56,9 +50,9 @@ function AdvertisingCard ({ ad, videoAds, empty, createAdFn, deleteAdFn }) {
 	}, [videoNames]);
 
 	return (
-		<div className='advertising grid  border-advertising border'>
-			<div className='grid-cols-2 bg-advertising font-bold border-advertising border p-2'>
-				Publicidad
+		<div className='advertising grid  border-advertising border '>
+			<div className={`grid-cols-2 bg-advertising font-bold border-advertising border p-2 ${empty ? '' : 'opacity-60'}`}>
+				P
 			</div>
 			<select
 				name='video' ref={videoRef}
@@ -77,7 +71,7 @@ function AdvertisingCard ({ ad, videoAds, empty, createAdFn, deleteAdFn }) {
 						</option>)
 				}
 			</select>
-			<div className=' grid grid-cols-SubTableAdvertising border-advertising border'>
+			<div className={` grid grid-cols-SubTableAdvertising border-advertising border ${empty ? '' : 'opacity-60'}`}>
 				<span className='col-start-1  col-end-1 border-advertising border p-2  text-sm'> Entrada publicidad </span>
 				<span className='border-advertising border-2  flex'>
 					<input
@@ -97,7 +91,7 @@ function AdvertisingCard ({ ad, videoAds, empty, createAdFn, deleteAdFn }) {
 					/>
 				</span>
 			</div>
-			<div className='grid grid-cols-SubTableAdvertising border-advertising border-2'>
+			<div className={`grid grid-cols-SubTableAdvertising border-advertising border-2 ${empty ? '' : 'opacity-60'}`}>
 				<span className=' border-advertising border-2 grid-flow-col p-2 text-sm'> Entrada para omitir </span>
 				<span className='border-advertising border-2  flex'>
 					<input
@@ -122,7 +116,7 @@ function AdvertisingCard ({ ad, videoAds, empty, createAdFn, deleteAdFn }) {
 				{
 					empty
 						? <button onClick={handleCreate} className='bg-gray-700 w-full cursor-pointer p-2'>Crear</button>
-						: <button onClick={handleDelete} className='bg-colorButtons w-full cursor-pointer p-2'>Eliminar</button>
+						: <button onClick={handleDelete} className='bg-colorButtons w-full cursor-pointer p-2 bg-opacity-100'>Eliminar</button>
 				}
 			</div>
 		</div>
