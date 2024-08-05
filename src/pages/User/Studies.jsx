@@ -12,6 +12,8 @@ const Studies = () => {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		const { StudyCode } = Object.fromEntries(new window.FormData(e.target));
+		console.log('ads', ads);
+		console.log('StudyCode', StudyCode);
 		const exist = ads.find((a) => a.StudyCode === StudyCode);
 		if (!exist) return window.alert('Estudio no encontrado');
 		navigate(`/estudio/${StudyCode}`);
@@ -25,7 +27,6 @@ const Studies = () => {
 		<Layout user>
 			<Skeletons on={loading} msg='Cargando'>
 				<div className='mt-20'>
-
 					<form
 						className='flex flex-col items-center gap-6 p-4 text-2xl'
 						action=''
