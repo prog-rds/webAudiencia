@@ -37,7 +37,8 @@ export default {
 			},
 			gridTemplateColumns: {
 				// Complex site-specific column configuration
-				SubTableAdvertising: '1fr 1fr'
+				SubTableAdvertising: '1fr 1fr',
+				SubTablehome: '1fr 2fr'
 			}
 		}
 	},
