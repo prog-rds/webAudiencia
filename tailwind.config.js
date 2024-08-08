@@ -14,7 +14,7 @@ export default {
 				colorButtonsText: '#ffffff',
 				'fields-color': 'rgba(124, 130, 141, 0.28)',
 				menu: '#DB3753',
-				linksMenu:'#ffffff',
+				linksMenu: '#ffffff',
 				footer: '#E1E1F1',
 				headerTable: '#DB3753'
 			},
@@ -39,6 +39,9 @@ export default {
 				// Complex site-specific column configuration
 				SubTableAdvertising: '1fr 1fr',
 				SubTablehome: '1fr 2fr'
+			},
+			maxWidth: {
+				'8xl': '130rem'
 			}
 		}
 	},
