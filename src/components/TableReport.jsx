@@ -3,7 +3,7 @@ import CardReport from '@src/components/CardReport';
 const TableReport = ({ user, userStudies, interactions, ads }) => {
 	return (
 
-		<div className=' flex mb-4 shadow-md  w-full'>
+		<div className=' flex mb-4 shadow-md'>
 			<div className='ctn-left'>
 				<div className='flex header-table rounded-tr-none'>
 					<div className='text-center w-1/2'> usuario </div>
@@ -20,7 +20,7 @@ const TableReport = ({ user, userStudies, interactions, ads }) => {
 					<div className='grid '>
 						<span>{user.UserName}</span>
 					</div>
-					<div className='grid grid-rows-SubTablehome grid-rows-7 items-center'>
+					<div className='grid grid-rows-SubTablehome grid-rows-6 items-center'>
 						<span className='p-2 border border-black  items-center'>Publicidad </span>
 						<span className='p-2 border border-black  items-center'>Fecha de reproducción </span>
 						<span className='p-2 border border-black  items-center'>Hora de reproducción </span>
@@ -30,8 +30,7 @@ const TableReport = ({ user, userStudies, interactions, ads }) => {
 					</div>
 				</div>
 			</div>
-
-			<div className='ctn-rigth flex '>
+			<div className='ctn-rigth flex overflow-x-auto max-w-7xl'>
 				{
 					userStudies.map((us, i) => (
 						<CardReport
