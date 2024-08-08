@@ -17,6 +17,7 @@ function TableUsers () {
 		console.log(data);
 		setUsers(data);
 	};
+
 	return (
 		<Skeletons on={loading} msg='Cargando usuarios'>
 			<div className='w-full text-right mb-4'>

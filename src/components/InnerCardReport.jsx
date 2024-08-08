@@ -16,8 +16,8 @@ const InnerCardReport = ({ userStudy, ads, interactions }) => {
 				{userStudy.StudyTime}
 			</div>
 			{
-				interactions.map((i, j) => (
-					<div key={j} className={`p-2 border border-black text-center col-start-${i + 1} col-end-${i + 2}`}>{i.ViewTime}</div>
+				ads.map((ad, j) => (
+					<div key={j} className={`p-2 border border-black text-center col-start-${j + 1} col-end-${j + 2}`}>{interactions[j] ? interactions[j].ViewTime : 'N/A'}</div>
 				))
 			}
 
@@ -28,8 +28,8 @@ const InnerCardReport = ({ userStudy, ads, interactions }) => {
 			}
 
 			{
-				interactions.map((i, j) => (
-					<span key={j} className={`p-2 border border-black text-center col-start-${i + 1} col-end-${i + 2}`}>{i.WasSkipped}</span>
+				ads.map((ad, j) => (
+					<span key={j} className={`p-2 border border-black text-center col-start-${j + 1} col-end-${j + 2}`}>{interactions[j] ? interactions[j].WasSkipped : 'N/A'}</span>
 				))
 			}
 

@@ -19,7 +19,7 @@ function VideoPlayer ({ videoStudy, ads }) {
 	}, [videoStudy]);
 
 	const handleDonePost = (data) => {
-		console.log('--- userStudy: --- \n', data.results.lastInsertRowid);
+		// console.log('--- userStudy: --- \n', data.results.lastInsertRowid);
 		setUserStudyId(data.results.lastInsertRowid);
 	};
 
@@ -41,13 +41,17 @@ function VideoPlayer ({ videoStudy, ads }) {
 			videoRef.current.play();
 			videoRef.current.setAttribute('autoplay', '');
 			const timer = [];
+			const tempPlayTime = {};
 			ads.forEach((ad, index) => {
+				tempPlayTime[index] = getInSeconds(ad.AdEntryTime);
+				// setPlayTime({ ...playTime, [index]: getInSeconds(ad.AdEntryTime) });
 				timer[index] = setTimeout(() => {
-					setPlayTime({ ...playTime, [index]: getInSeconds(ad.AdEntryTime) });
 					setIsPlayingPromo({ ...isPlayingPromo, [index]: true, [index + 1]: false });
 					console.log('show ad ', index, getInSeconds(ad.AdEntryTime));
 				}, getInSeconds(ad.AdEntryTime) * 1000);
 			});
+			setPlayTime(tempPlayTime);
+			console.log('playTime: ', tempPlayTime);
 			return () => {
 				timer.forEach((t) => clearTimeout(t));
 			};
@@ -70,21 +74,22 @@ function VideoPlayer ({ videoStudy, ads }) {
 	const handleClick = (e) => e.preventDefault();
 
 	const handleDoneInteraction = (data) => {
-		console.log('--- interaction: --- \n', data);
+		// console.log('--- interaction: --- \n', data);
 	};
 
 	const handleSkip = () => {
 		// videoRef.current.pause(); ???
+		console.log('-- PLAYTIME --', playTime);
 		const min = Math.floor(videoRef.current.currentTime / 60);
 		const sec = Math.floor(videoRef.current.currentTime % 60);
 		const ViewTime = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-		console.log('ViewTime: ', ViewTime);
+		// console.log('ViewTime: ', ViewTime);
 		const body = { UserStudyId: userStudyId, AdId: ads[actualAd].AdId, WasSkipped: 'Yes', ViewTime };
 		createInteraction({ loading: 'init', setLoading: () => {}, body, handleDonePost: handleDoneInteraction });
-		console.log('LLEVAAA: ', videoRef.current.currentTime);
+		// console.log('LLEVAAA: ', videoRef.current.currentTime);
 		setPromoSkipped({ ...promoSkipped, [actualAd]: true });
 		setIsPlayingPromo({ ...isPlayingPromo, [actualAd]: false });
-		if (actualAd < ads.length - 1)
+		if (actualAd < ads.length)
 			setActualAd(actualAd + 1);
 	};
 
@@ -118,7 +123,8 @@ function VideoPlayer ({ videoStudy, ads }) {
 				<video
 					id='main-video-id'
 					ref={videoRef}
-					src={isPlayingPromo[actualAd] ? ads[actualAd].Link : `${videoStudy.Link}#t=${23}`}
+					// src={isPlayingPromo[actualAd] ? ads[actualAd].Link : `${videoStudy.Link}`}
+					src={isPlayingPromo[actualAd] ? ads[actualAd].Link : `${videoStudy.Link}#t=${playTime[actualAd - 1]}`}
 					onPlaying={() => setIsPlaying(true)}
 					onEnded={handleEnd}
 					onClick={handleClick}

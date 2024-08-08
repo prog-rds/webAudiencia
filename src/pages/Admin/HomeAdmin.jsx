@@ -1,6 +1,6 @@
 import TableReport from '@src/components/TableReport';
 import Layout from './Layout';
-import { getItems } from '@src/hooks/LoaderData.jsx';
+import { getItems, fetchReport } from '@src/hooks/LoaderData.jsx';
 import { useEffect, useState } from 'react';
 import { Skeletons } from '@src/components/Skeletons';
 
@@ -9,6 +9,8 @@ const HomeAdmin = () => {
 	const [loadingUs, setLoadingUs] = useState('init');
 	const [loadingI, setLoadingI] = useState('init');
 	const [loadingAds, setLoadingAds] = useState('init');
+	const [loadingDownload, setLoadingDownload] = useState('init');
+
 	const [userStudies, setUserStudies] = useState([]);
 	const [users, setUsers] = useState([]);
 	const [interactions, setInteractions] = useState([]);
@@ -20,24 +22,35 @@ const HomeAdmin = () => {
 	useEffect(() => getItems({ path: '/ads', loading: loadingAds, setLoading: setLoadingAds, setData: setDataAds }), []);
 
 	const setDataU = (data) => {
-		console.log(data);
+		// console.log(data);
 		setUsers(data);
 	};
 	const setDataUs = (data) => {
-		console.log(data);
+		// console.log(data);
 		setUserStudies(data);
 	};
 	const setDataI = (data) => {
-		console.log(data);
+		// console.log(data);
 		setInteractions(data);
 	};
 	const setDataAds = (data) => {
-		console.log(data);
+		// console.log(data);
 		setAds(data);
+	};
+
+	const handleDownload = async () => {
+		// download a csv
+		await fetchReport(loadingDownload, setLoadingDownload);
+		setLoadingDownload('init');
 	};
 	return (
 		<Layout>
 			<section className='grid place-items-center'>
+				<div className='w-full text-right mb-4'>
+					<button className='btns-table mx-3 mb-5' onClick={handleDownload}>
+						Descargar
+					</button>
+				</div>
 				<Skeletons on={loadingUs} msg='Cargando'>
 					{
 						users.filter((u) => u.UserRole === 'Usuario').map((u, i) => (

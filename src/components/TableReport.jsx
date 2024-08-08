@@ -2,7 +2,6 @@ import CardReport from '@src/components/CardReport';
 
 const TableReport = ({ user, userStudies, interactions, ads }) => {
 	return (
-
 		<div className=' flex mb-4 shadow-md'>
 			<div className='ctn-left'>
 				<div className='flex header-table rounded-tr-none'>
