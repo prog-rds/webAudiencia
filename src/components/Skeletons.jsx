@@ -7,7 +7,9 @@ export function Skeletons ({ children, on, msg }) {
 	// Componente a mostrar mientras se cargan los datos
 	// centrar texto verticalmente
 		<div className=' skeleton  text-black flex flex-col justify-center px-3 '>
-			<h3 className='loading'>{msg}</h3>
+			<h3 className='loading'>
+				<b>{msg}</b>
+			</h3>
 		</div>
 	// -----------------------------------------------
 		: (on === 'ok' || on === 'init' ?
