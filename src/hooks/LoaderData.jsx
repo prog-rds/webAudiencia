@@ -7,6 +7,15 @@ const getItems = ({ path, loading, setLoading, setData }) => {
 			setData({ status: 500, err });
 		});
 };
+const getStatic = ({ uri, loading, setLoading, setData }) => {
+	console.log('Getting: ', uri);
+	if (loading === 'ok') return;
+	fetchStatic({ setLoading, uri }).then((d) => setData(d))
+		.catch((err) => {
+			console.log(err);
+			setData({ status: 500, err });
+		});
+};
 
 const fetchData = ({ setLoading, path }) => {
 	return new Promise((resolve, reject) => {
@@ -31,8 +40,41 @@ const fetchData = ({ setLoading, path }) => {
 				resolve(data);
 			})
 			.catch(async err => {
-				const text = await err.text();
+				const text = await err?.text();
 				console.log('[GET txt]: ', text);
+				console.log('[GET err]: ', err);
+				setLoading(processError(err));
+				reject(processError(err));
+			});
+	});
+};
+
+const fetchStatic = ({ setLoading, uri }) => {
+	return new Promise((resolve, reject) => {
+		const myHeaders = new Headers();
+		myHeaders.append('Authorization', `Bearer ${window.localStorage.token}`); // produccion
+		myHeaders.append('Content-Type', 'application/mp4'); // produccion
+
+		const requestOptions = {
+			method: 'GET',
+			headers: myHeaders,
+			redirect: 'follow'
+		};
+		const rq = new Request(uri, requestOptions);
+
+		setLoading('loading');
+		fetch(rq)
+			.then(res => {
+				console.log('etapa 1', res);
+				if (res.ok) return res.blob();
+				throw res;
+			})
+			.then(data => {
+				console.log('etapa 2');
+				setLoading('ok');
+				resolve(URL.createObjectURL(data));
+			})
+			.catch(async err => {
 				console.log('[GET err]: ', err);
 				setLoading(processError(err));
 				reject(processError(err));
@@ -48,4 +90,4 @@ const processError = (err) => {
 	return err;
 };
 
-export { getItems };
+export { getItems, getStatic };

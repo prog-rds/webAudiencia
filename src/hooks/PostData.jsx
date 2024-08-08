@@ -8,6 +8,21 @@ const createUser = ({ loading, setLoading, body, handleDonePost }) => {
 		});
 };
 
+const createUserStudy = ({ loading, setLoading, body, handleDonePost }) => {
+	if (loading === 'ok') return;
+	postData({ setLoading, path: '/userstudies', body, method: 'POST' }).then((d) => handleDonePost(d))
+		.catch((err) => {
+			window.alert(err);
+		});
+};
+const createInteraction = ({ loading, setLoading, body, handleDonePost }) => {
+	if (loading === 'ok') return;
+	postData({ setLoading, path: '/interactions', body, method: 'POST' }).then((d) => handleDonePost(d))
+		.catch((err) => {
+			window.alert(err);
+		});
+};
+
 const createAd = ({ loading, setLoading, body, handleDonePost }) => {
 	if (loading === 'ok') return;
 	postData({ setLoading, path: '/ads', body, method: 'POST' }).then((d) => handleDonePost(d))
@@ -90,4 +105,4 @@ const postData = ({ setLoading, path, body, method }) => {
 	});
 };
 
-export { createUser, deleteUser, updateUser, loadImage, deleteVideoStudy, deleteVideoAd, createAd, deleteAd };
+export { createUser, createUserStudy, createInteraction, deleteUser, updateUser, loadImage, deleteVideoStudy, deleteVideoAd, createAd, deleteAd };

@@ -33,12 +33,15 @@ const Login = () => {
 	return (
 		<div className='bg-texture bg-cover w-screen h-screen grid place-items-center'>
 			<div className='w-12/12 bg flex flex-col md:flex-row'>
-				<div className='w-12/12 md:w-6/12 grid place-items-center'>
+				<div className='w-4/12 md:w-3/12 grid place-items-center'>
 					<img className='place-items-center pt-12 w-96 md:w-full md:pt-0' src={logo} alt='logo' />
 				</div>
 				<div>
 					<h1 className='text-6xl font-custom text-center mb-8 font-bold'>
-						¡Bienvenido al portal de YouTube!
+						¡Bienvenido al
+					</h1>
+					<h1 className='text-6xl font-custom text-center mb-8 font-bold'>
+						Administrador de publicidad!
 					</h1>
 					<form
 						className='flex flex-col items-center gap-6 p-4 text-2xl'

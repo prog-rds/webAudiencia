@@ -16,6 +16,17 @@ function VideoUpload ({ type }) {
 		const tagVideo = document.createElement('video');
 		tagVideo.preload = 'metadata';
 		tagVideo.onloadedmetadata = () => {
+			const size = video.size / 1024 / 1024;
+			if (size > 1024) {
+				alert('El tamaño del video no puede ser mayor a 1GB');
+				return;
+			}
+			// check the format of the video
+			const format = video.type.split('/')[1];
+			if (format !== 'mp4') {
+				alert('El formato del video debe ser .mp4');
+				return;
+			}
 			const minutes = Math.floor(tagVideo.duration / 60);
 			const seconds = Math.floor(tagVideo.duration % 60).toString().padStart(2, '0');
 			const formattedDuration = `${minutes}:${seconds}`;
@@ -59,7 +70,8 @@ function VideoUpload ({ type }) {
 	return (
 		<>
 			<div className='file-uploader btns mb-5 flex items-center'>
-				<div className='mr-3 text-2xl font-semibold '>Nuevo: </div>
+				<span>(Formato: .mp4 tamaño max: 1GB  )</span>
+				<div className='mr-3 text-2xl font-semibold '>&nbsp; &nbsp; Nuevo: </div>
 				{
 					video
 						? (

@@ -36,8 +36,9 @@ function RowTable ({ video, ads, videoAds }) {
 			<div className='grid w-4/5 border-advertising border-2'>
 				<div className='text-center  grid grid-cols-3 '>
 					{
-						rowAds.map((ad) => (
+						rowAds.map((ad, i) => (
 							<AdvertisingCard
+								index={i}
 								key={ad.AdId}
 								ad={ad}
 								videoAds={videoAds}

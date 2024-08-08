@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '@styles/AdvertisingCard.css';
 
-function AdvertisingCard ({ ad, videoAds, empty, createAdFn, deleteAdFn }) {
+function AdvertisingCard ({ ad, videoAds, empty, createAdFn, deleteAdFn, index }) {
 	const [advertising, setAdvertising] = useState({});
 	const [videoNames, setVideoNames] = useState([]);
 	const videoRef = useRef();
@@ -52,7 +52,7 @@ function AdvertisingCard ({ ad, videoAds, empty, createAdFn, deleteAdFn }) {
 	return (
 		<div className='advertising grid  border-advertising border '>
 			<div className={`grid-cols-2 bg-advertising font-bold border-advertising border p-2 ${empty ? '' : 'opacity-60'}`}>
-				P
+				{empty ? 'Nueva' : `P${index + 1}`}
 			</div>
 			<select
 				name='video' ref={videoRef}
@@ -115,7 +115,7 @@ function AdvertisingCard ({ ad, videoAds, empty, createAdFn, deleteAdFn }) {
 			<div className=' text-colorButtonsText font-semibold'>
 				{
 					empty
-						? <button onClick={handleCreate} className='bg-gray-700 w-full cursor-pointer p-2'>Crear</button>
+						? <button onClick={handleCreate} className='bg-gray-700 w-full cursor-pointer p-2'>Agregar publicidad</button>
 						: <button onClick={handleDelete} className='bg-colorButtons w-full cursor-pointer p-2 bg-opacity-100'>Eliminar</button>
 				}
 			</div>

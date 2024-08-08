@@ -27,6 +27,7 @@ const ViewStudy = () => {
 		realAds.forEach((ra) => {
 			const va = videoAds.find((v) => v.VideoAdId === ra.VideoAdId);
 			ra.Link = va?.Link;
+			ra.Duration = va?.Duration;
 		});
 		console.log('ads ->', realAds);
 		setLdAds('done');
@@ -49,7 +50,7 @@ const ViewStudy = () => {
 		<>
 			<Skeletons on={ads && videoStudy ? 'ok' : ''} msg='Cargando'>
 				<VideoPlayer
-					mainVideoUrl={videoStudy}
+					videoStudy={videoStudy}
 					ads={ads}
 					// initPromo={5}
 					// promoDuration={5}
