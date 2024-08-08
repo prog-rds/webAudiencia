@@ -1,6 +1,6 @@
 const InnerCardReport = ({ userStudy, ads, interactions }) => {
 	return (
-		<div className={`grid grid-rows-6 grid-cols-${ads.length}`}>
+		<div className={`test grid grid-rows-6 grid-cols-${ads.length}`}>
 			{
 				ads.map((a, i) => (
 					<div key={i} className={`p-2 border border-black text-center col-start-${i + 1} col-end-${i + 2}`}>Publicidad{` ${i + 1}`}</div>
