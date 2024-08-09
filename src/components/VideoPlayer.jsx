@@ -4,6 +4,7 @@ import '@styles/VideoPlayer.css';
 import { createUserStudy, createInteraction } from '@src/hooks/PostData';
 import PlayScreen from './PlayScreen';
 
+// TODO: ordenar los ads por el tiempo de entrada
 function VideoPlayer ({ videoStudy, ads }) {
 	const container = useRef(null);
 	const videoRef = useRef(null);
@@ -42,21 +43,27 @@ function VideoPlayer ({ videoStudy, ads }) {
 			// const timer = [];
 			const tempPlayTime = {};
 			ads.forEach((ad, index) => {
-				tempPlayTime[index] = getInSeconds(ad.AdEntryTime) - 1;
+				tempPlayTime[index] = getInSeconds(ad.AdEntryTime);
 			});
-			const timeLauch = getInSeconds(ads[0].AdEntryTime) * 1000;
-			console.log('ohhhhhhhh', timeLauch);
-			const timer = setTimeout(() => {
-				console.log('play promo');
-				setIsPlayingPromo({ ...isPlayingPromo, 0: true, 1: false });
-			}, timeLauch);
 			setPlayTime(tempPlayTime);
-
-			return () => clearTimeout(timer);
+			LaunchTimer(0);
 			// return () => {
 			// 	timer.forEach((t) => clearTimeout(t));
 			// };
 		}
+	};
+	const LaunchTimer = (t) => {
+		const timeNew = t >= ads.length ? 0 : getInSeconds(ads[t].AdEntryTime) * 1000;
+		const timeLast = t === 0 ? 0 : getInSeconds(ads[actualAd].AdEntryTime) * 1000;
+		const timeLauch = timeNew - timeLast;
+		console.log('ohhhhhhhh', timeLauch);
+		const timer = setTimeout(() => {
+			const idA = t;
+			const idB = t + 1;
+			console.log('play promo');
+			setIsPlayingPromo({ ...isPlayingPromo, [idA]: true, [idB]: false });
+		}, timeLauch);
+		return () => clearTimeout(timer);
 	};
 
 	const getInSeconds = (time) => {
@@ -88,9 +95,12 @@ function VideoPlayer ({ videoStudy, ads }) {
 		setIsPlayingPromo({ ...isPlayingPromo, [actualAd]: false });
 		if (actualAd < ads.length)
 			setActualAd(actualAd + 1);
+		if (actualAd < ads.length - 1)
+			LaunchTimer(actualAd + 1);
 	};
 
 	const handleEnd = () => {
+		// TODO: Lanzar el launchTimer cuando no se da skip
 		if (isPlayingPromo[actualAd]) {
 			const min = ads[actualAd].Duration.split(':')[0];
 			const sec = ads[actualAd].Duration.split(':')[1];
@@ -118,7 +128,9 @@ function VideoPlayer ({ videoStudy, ads }) {
 				<video
 					id='main-video-id'
 					ref={videoRef}
-					src={isPlayingPromo[actualAd] ? ads[actualAd].Link : `${videoStudy.Link}#t=${playTime[actualAd - 1]}`}
+					src={isPlayingPromo[actualAd]
+						? ads[actualAd].Link
+						: `${videoStudy.Link}#t=${playTime[actualAd - 1]}`}
 					onPlaying={() => setIsPlaying(true)}
 					onEnded={handleEnd}
 					onClick={handleClick}
