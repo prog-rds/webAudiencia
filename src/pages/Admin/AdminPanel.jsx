@@ -31,12 +31,12 @@ const AdminPanel = () => {
 	};
 	return (
 		<Layout>
-			<section className='w-full'>
+			<section className='w-full pb-12'>
 				<h2 className='w-full title-principal'>Panel administrativo</h2>
-				<div className='p-6'>
+				<div className='p-0 md:p-6'>
 					<div className='header-table'>
-						<div className='text-center w-2/5'> Estudios </div>
-						<div className='text-center w-4/5'> Publicidades </div>
+						<div className='text-center w-full md:w-2/5'> Estudios </div>
+						<div className='text-center w-4/5 hidden md:block'> Publicidades </div>
 					</div>
 					<Skeletons on={(ldVs === 'done' && ldAds === 'done' && ldVa === 'done') ? 'ok' : ''} msg='Cargando'>
 						<div className='body-table '>

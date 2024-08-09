@@ -42,7 +42,7 @@ button:focus-visible {
 } */
 @layer components {
 	.title-principal{
-		@apply text-colorTitle text-5xl font-bold italic text-left
+		@apply text-colorTitle text-3xl font-bold italic mb-4 text-left md:text-5xl 
 	}
 	.header-table{
 		@apply bg-colorTitle font-bold text-base flex w-full text-colorTextTable p-4 rounded-t-xl
