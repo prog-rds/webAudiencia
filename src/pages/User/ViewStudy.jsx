@@ -48,6 +48,7 @@ const ViewStudy = () => {
 
 	return (
 		<>
+			<button className='fixed left-0' onClick={() => { window.history.back(); }}>🏠</button>
 			<Skeletons on={ads && videoStudy ? 'ok' : ''} msg='Cargando'>
 				<VideoPlayer
 					videoStudy={videoStudy}

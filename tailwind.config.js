@@ -25,9 +25,7 @@ export default {
 				texture: "url('@src/assets/img/texture.png')",
 				bgAdmin: "url('@src/assets/img/bg-users.png')",
 				login: "url('@src/assets/img/login.png')",
-				'btns-admin': "url('@src/assets/img/Rectangle.png')",
-				footer: "url('@src/assets/img/bg.png')",
-				bgUser: "url('@src/assets/img/bguser.png')"
+				'btns-admin': "url('@src/assets/img/Rectangle.png')"
 			},
 			dropShadow: {
 				'3xl': '6px 4px 7px rgba(0, 0, 0, 0.25)'

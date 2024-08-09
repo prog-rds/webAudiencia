@@ -2,15 +2,16 @@ import React, { useState, useRef, useEffect } from 'react';
 import Overlay from '@components/Overlay';
 import '@styles/VideoPlayer.css';
 import { createUserStudy, createInteraction } from '@src/hooks/PostData';
+import PlayScreen from './PlayScreen';
 
 function VideoPlayer ({ videoStudy, ads }) {
 	const container = useRef(null);
 	const videoRef = useRef(null);
 	const [actualAd, setActualAd] = useState(0);
 	const [isPlaying, setIsPlaying] = useState(false);
-	const [isPlayingPromo, setIsPlayingPromo] = useState({ 0: false });// va multiple <---
+	const [isPlayingPromo, setIsPlayingPromo] = useState({ 0: false });
 	const [isFullScreen, setIsFullScreen] = useState(false);
-	const [promoSkipped, setPromoSkipped] = useState({ 0: false });// va multiple <---
+	const [promoSkipped, setPromoSkipped] = useState({ 0: false });
 	const [playTime, setPlayTime] = useState({ 0: 0 });
 	const [userStudyId, setUserStudyId] = useState(null);
 
@@ -19,7 +20,6 @@ function VideoPlayer ({ videoStudy, ads }) {
 	}, [videoStudy]);
 
 	const handleDonePost = (data) => {
-		// console.log('--- userStudy: --- \n', data.results.lastInsertRowid);
 		setUserStudyId(data.results.lastInsertRowid);
 	};
 
@@ -30,7 +30,6 @@ function VideoPlayer ({ videoStudy, ads }) {
 		const StudyDate = (date.toISOString().split('T')[0]).replace(/-/g, '/');
 		const StudyTime = `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
 		const body = { UserId: userId, StudyCode: videoStudy.StudyCode, StudyDate, StudyTime };
-		// loading, setLoading, body, handleDonePost
 		createUserStudy({ loading: 'init', setLoading: () => {}, body, handleDonePost });
 		if (!isFullScreen || !document.fullscreenElement) {
 			const fullscreenApi = 	container.current.requestFullscreen ||
@@ -40,21 +39,23 @@ function VideoPlayer ({ videoStudy, ads }) {
 			fullscreenApi.call(container.current);
 			videoRef.current.play();
 			videoRef.current.setAttribute('autoplay', '');
-			const timer = [];
+			// const timer = [];
 			const tempPlayTime = {};
 			ads.forEach((ad, index) => {
-				tempPlayTime[index] = getInSeconds(ad.AdEntryTime);
-				// setPlayTime({ ...playTime, [index]: getInSeconds(ad.AdEntryTime) });
-				timer[index] = setTimeout(() => {
-					setIsPlayingPromo({ ...isPlayingPromo, [index]: true, [index + 1]: false });
-					console.log('show ad ', index, getInSeconds(ad.AdEntryTime));
-				}, getInSeconds(ad.AdEntryTime) * 1000);
+				tempPlayTime[index] = getInSeconds(ad.AdEntryTime) - 1;
 			});
+			const timeLauch = getInSeconds(ads[0].AdEntryTime) * 1000;
+			console.log('ohhhhhhhh', timeLauch);
+			const timer = setTimeout(() => {
+				console.log('play promo');
+				setIsPlayingPromo({ ...isPlayingPromo, 0: true, 1: false });
+			}, timeLauch);
 			setPlayTime(tempPlayTime);
-			console.log('playTime: ', tempPlayTime);
-			return () => {
-				timer.forEach((t) => clearTimeout(t));
-			};
+
+			return () => clearTimeout(timer);
+			// return () => {
+			// 	timer.forEach((t) => clearTimeout(t));
+			// };
 		}
 	};
 
@@ -78,15 +79,11 @@ function VideoPlayer ({ videoStudy, ads }) {
 	};
 
 	const handleSkip = () => {
-		// videoRef.current.pause(); ???
-		console.log('-- PLAYTIME --', playTime);
 		const min = Math.floor(videoRef.current.currentTime / 60);
 		const sec = Math.floor(videoRef.current.currentTime % 60);
 		const ViewTime = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-		// console.log('ViewTime: ', ViewTime);
 		const body = { UserStudyId: userStudyId, AdId: ads[actualAd].AdId, WasSkipped: 'Yes', ViewTime };
 		createInteraction({ loading: 'init', setLoading: () => {}, body, handleDonePost: handleDoneInteraction });
-		// console.log('LLEVAAA: ', videoRef.current.currentTime);
 		setPromoSkipped({ ...promoSkipped, [actualAd]: true });
 		setIsPlayingPromo({ ...isPlayingPromo, [actualAd]: false });
 		if (actualAd < ads.length)
@@ -99,9 +96,7 @@ function VideoPlayer ({ videoStudy, ads }) {
 			const sec = ads[actualAd].Duration.split(':')[1];
 			const ViewTime = `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
 			const body = { UserStudyId: userStudyId, AdId: ads[actualAd].AdId, WasSkipped: 'No', ViewTime };
-
 			createInteraction({ loading: 'init', setLoading: () => {}, body, handleDonePost: handleDoneInteraction });
-
 			setIsPlayingPromo({ ...isPlayingPromo, [actualAd]: false });
 			setPromoSkipped({ ...promoSkipped, [actualAd]: false });
 		}
@@ -112,29 +107,29 @@ function VideoPlayer ({ videoStudy, ads }) {
 
 	return (
 		<>
-			<div className='flex items-center justify-center h-screen'>
+			<div className='flex items-center justify-center h-screen w-full'>
 				{
 					isFullScreen
 						? <button className='btn-upload' onClick={handleBack}>Volver</button>
-						: <button className='btn-upload' onClick={handlePlay}>Play</button>
+						: <PlayScreen handlePlay={handlePlay} />
 				}
 			</div>
 			<div ref={container} id='video-container' onContextMenu={(e) => e.preventDefault()} className='video-container'>
 				<video
 					id='main-video-id'
 					ref={videoRef}
-					// src={isPlayingPromo[actualAd] ? ads[actualAd].Link : `${videoStudy.Link}`}
 					src={isPlayingPromo[actualAd] ? ads[actualAd].Link : `${videoStudy.Link}#t=${playTime[actualAd - 1]}`}
 					onPlaying={() => setIsPlaying(true)}
 					onEnded={handleEnd}
 					onClick={handleClick}
 					onPause={handlePause}
 					preload='auto'
+					height='1px'
+					width='1px'
+					fetchpriority='high'
 				/>
-
 				{
 					isPlayingPromo[actualAd] && (
-						// TODO: probar poner video de ad dentro del overlay
 						<Overlay
 							isPlaying={isPlaying}
 							isFullScreen={isFullScreen}
@@ -145,9 +140,7 @@ function VideoPlayer ({ videoStudy, ads }) {
 					)
 				}
 			</div>
-
 		</>
-
 	);
 }
 

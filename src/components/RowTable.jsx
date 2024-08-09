@@ -30,8 +30,11 @@ function RowTable ({ video, ads, videoAds }) {
 	};
 	return (
 		<div className='row flex flex-col  mb-4 shadow-md md:flex-row'>
-			<div className='grid w-full md:w-2/5 border-advertising border-2 place-items-center'>
-				<div className='text-center'> {video.StudyCode} </div>
+			<div className='grid w-full md:w-2/5 border-advertising border-2 place-items-center p-2'>
+				<div className='text-center text-base break-all flex flex-col'>
+					<b>{video.StudyCode}</b>
+					<span>({video.Duration})</span>
+				</div>
 			</div>
 			<div className='wfull md:w-4/5 border-advertising border-2'>
 				<div className='text-center  grid grid-cols-1 md:grid-cols-3 md:grid-flow-row'>
