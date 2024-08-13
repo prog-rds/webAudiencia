@@ -26,7 +26,7 @@ const Studies = () => {
 	return (
 		<Layout user>
 			<Skeletons on={loading} msg='Cargando'>
-				<div className='mt-20'>
+				<div className='absolute -translate-x-1/2 left-1/2 top-1/2 -translate-y-1/2'>
 					<form
 						className='flex flex-col items-center gap-6 p-4 text-2xl'
 						action=''

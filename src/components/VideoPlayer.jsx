@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Overlay from '@components/Overlay';
 import '@styles/VideoPlayer.css';
 import { createUserStudy, createInteraction } from '@src/hooks/PostData';
-import PlayScreen from './PlayScreen';
+import PlayScreen from '@components/PlayScreen';
 
 // TODO: ordenar los ads por el tiempo de entrada
 function VideoPlayer ({ videoStudy, ads }) {
@@ -139,6 +139,7 @@ function VideoPlayer ({ videoStudy, ads }) {
 					height='1px'
 					width='1px'
 					fetchpriority='high'
+					controls
 				/>
 				{
 					isPlayingPromo[actualAd] && (

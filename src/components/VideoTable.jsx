@@ -21,6 +21,13 @@ const VideoTable = ({ videoStudies, rowFocused, setRowFocused, type }) => {
 							<th scope='col' className='px-6 py-3'>
 								{column1}
 							</th>
+							{
+								type === '1' && (
+									<th scope='col' className='px-6 py-3'>
+										Nombre
+									</th>
+								)
+							}
 							<th scope='col' className='px-6 py-3'>
 								Duración
 							</th>

@@ -45,7 +45,7 @@ const HomeAdmin = () => {
 	};
 	return (
 		<Layout>
-			<section className='grid'>
+			<section className='grid pb-24'>
 				<div className='w-full text-right mb-4'>
 					<button className='btns-table mx-3 mb-5' onClick={handleDownload}>
 						Descargar

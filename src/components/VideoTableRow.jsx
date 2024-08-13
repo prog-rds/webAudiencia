@@ -22,8 +22,17 @@ const VideoTableRow = ({ video, type }) => {
 	return (
 		<tr className='border-b  text-center hover:bg-gray-300'>
 			<td className='break-words px-6 py-4 focus:bg-gray-400 focus:cursor-text focus:text-primary-color'>
-				{video[id]}
+				<b>
+					{video[id]}
+				</b>
 			</td>
+			{
+				type === '1' && (
+					<td className='break-words px-6 py-4 focus:bg-gray-400 focus:cursor-text focus:text-primary-color'>
+						{video.VideoName}
+					</td>
+				)
+			}
 			<td className='break-words px-6 py-4 focus:bg-gray-400 focus:cursor-text focus:text-primary-color'>
 				{video.Duration}
 			</td>

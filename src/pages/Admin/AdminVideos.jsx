@@ -25,7 +25,7 @@ const AdminVideos = () => {
 	};
 	return (
 		<Layout>
-			<div className='mb-12'>
+			<div className='pb-24'>
 				<h2 className='w-full title-principal'>Video estudios</h2>
 				<Skeletons on={ldVs} msg='Cargando '>
 					<VideoTable

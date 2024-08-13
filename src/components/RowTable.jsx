@@ -29,7 +29,7 @@ function RowTable ({ video, ads, videoAds }) {
 			deleteAd({ id: d.AdId, setLoading: setLoadingAd, handleDonePost });
 	};
 	return (
-		<div className='row flex flex-col  mb-4 shadow-md md:flex-row'>
+		<div className='row flex flex-col  mb-10 shadow-lg md:flex-row shadow-gray-500'>
 			<div className='grid w-full md:w-2/5 border-advertising border-2 place-items-center p-2'>
 				<div className='text-center text-base break-all flex flex-col'>
 					<b>{video.StudyCode}</b>
@@ -49,12 +49,15 @@ function RowTable ({ video, ads, videoAds }) {
 								deleteAdFn={deleteAdFn}
 							/>
 						))
+					}{
+						rowAds.length < 6 && (
+							<AdvertisingCard
+								createAdFn={createAdFn}
+								videoAds={videoAds}
+								empty
+							/>
+						)
 					}
-					<AdvertisingCard
-						createAdFn={createAdFn}
-						videoAds={videoAds}
-						empty
-					/>
 				</div>
 			</div>
 		</div>

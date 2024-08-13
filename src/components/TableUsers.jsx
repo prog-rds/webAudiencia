@@ -25,7 +25,7 @@ function TableUsers () {
 					Nuevo
 				</Link>
 			</div>
-			<div className='relative overflow-x-auto shadow-md'>
+			<div className='relative overflow-x-auto shadow-md pb-24'>
 				<table className='text-sm text-center text-black min-w-full '>
 					<thead className='text-xs text-white uppercase bg-headerTable sm:rounded-lg'>
 						<tr className='border-t border-b'>

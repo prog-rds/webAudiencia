@@ -19,12 +19,14 @@ function VideoUpload ({ type }) {
 			const size = video.size / 1024 / 1024;
 			if (size > 1024) {
 				alert('El tamaño del video no puede ser mayor a 1GB');
+				setVideo(null);
 				return;
 			}
 			// check the format of the video
 			const format = video.type.split('/')[1];
 			if (format !== 'mp4') {
 				alert('El formato del video debe ser .mp4');
+				setVideo(null);
 				return;
 			}
 			const minutes = Math.floor(tagVideo.duration / 60);
